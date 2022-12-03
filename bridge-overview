@@ -1,0 +1,38 @@
+The Shinarium Protocol created the ShinaBridge—something that's both unique and valuable in the crypto space, a fully trustless bridge for transferring tokens between Shinarium and over 20+ blockchain assets.
+
+TIP
+
+Before you start using the bridge, we recommend browsing through the ShinaBridge page and ShinaBridge options. This info is described pretty concisely and will definitely help you avoid common pitfalls and understand how the bridge works.
+The official ShinaBridge page is https://shinabridge.app(To be Live)
+
+The About menu gives you a short description of the bridge, the networks it can be used with and the explanation of why our bridge is unique. Yes, we can proudly say that it is unique, indeed! :)
+Using A Unique Approach to Bridge Between L1 & L2
+ShinaBridge allows you to transfer Ethereum tokens from layer 1 blockchain to layer 2. You can make use of this feature to bridge Ethereum tokens to the Shinarium Olamma network that extends the capabilities of regular testnets and development platforms. You can use ShinaBridge to transfer tokens between testnets or mainnets. You need to set up your MetaMask account and connect to the:
+ Shinarium mainnet (Mainnet), 
+Shinarium Olamma (Testnet) and 
+Shinarium Next (Testnnet).
+Adding the Shinarium Testnet and Mainnet
+After setting up your MetaMask account, you can use ShinaBridge to bridge tokens between networks. MetaMask is a great tool for managing Ethereum transactions and having all information in one place. But, if you want to achieve a bunch of additional features, you can set up your Shinarium DeFi Extension wallet account. Shinarium DeFi Extension wallet is like MetaMask that offers more capabilities than MetaMask.
+Make sure you have added Shinarium (Shinarium Mainnet) to your MetaMask account. Follow the instructions given in this link to add it to your account or simply follow the next steps.
+If you experience issues at any time during the transfer, there is the Support link that opens a contact help form. The same form can be easily accessed through the green icon Questions in the lower right corner. Note that the button is yet another source of common questions.
+ They pop up when you click the button. If you still need assistance, just click the Ask bubble at the top of the form.
+
+Chain and Network Definitions
+A bridge is created between 2 networks, referred to as a Native (or Home) Network and a Foreign Network.
+Home: A network with fast and inexpensive operations. All bridge operations to collect validator confirmations are performed on this side of the bridge, always refers to Shinarium.
+Foreign: Can be one of Etheruem/BSC/HECO
+ERC20: Refers to an ERC20 token created during the bridge process. In the ERC20-ERC20 bridge, ERC677 represent ERC20 tokens on one side of the bridge and are minted and burned accordingly.
+Bridge Components
+A bridge is created between two networks, referred to as a Native (or Home) Network and Foreign Network.
+Token bridge: Listens to events and sends transactions to authorize asset transfers. Bridge UI Application: A DApp GUI to transfer tokens and coins between chains.
+Bridge UI Application. A DApp GUI to transfer tokens and coins between chains.
+Bridge smart contracts: Manages bridge validators, collects signatures, and confirms assets relay and disposal. Located at: https://github.com/shinarium/shinabridge
+Now let’s move to the upper right corner.
+First, there is the three dots button. The very first option would be Dark Mode in case you are a fan of the dark theme.
+Another feature is Scan Transfer History. It is useful if you can’t find transactions that you believe you have made (perhaps you hid them unintentionally). Also, if you still happen to have transactions completed on bridge Version 1.0 (ethereum.shinabridge.com) but don’t see them in the list, this option will help you recover them.
+Then there is the down arrow. Once clicked, the list of supported networks expands. This is a shortcut allowing you to connect necessary networks before you start a transfer.
+TIP
+There are two other ways to connect networks
+If you don't have the Shinarium/Ethereum as your default network in MetaMask, the bridge will initiate a prompt in MetaMask to pre-configure and confirm adding Shinarium or switching to Shinarium/Ethereum, and then you can switch to the respective network as the default network.
+Alternatively, to add Shinarium to MetaMask, visit the Shinarium Start page https://shinarium.dev/start. Then click “Add Network” (Mainnet) to add the Shinarium network to MetaMask.
+We’ll touch upon the remaining Security, Deploy Token and Restore Transfer options in the Advanced Features chapter.
