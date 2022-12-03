@@ -1,0 +1,18 @@
+Shinarium Faucet
+
+Shinarium Faucet (opens new window)is a simple faucet for Shinarium Olamma that drips ETH and $SHINA. Authenticate with github, enter your wallet address, and you'll automatically be sent 0.2 ETH and 100 $SHINA (if available) on the Shinarium Next testnet.
+You need to be following at least five people or organizations on github to be considered a real account. If you don't, follow more, log out of the faucet, and log back in.
+
+Paradigm MultiFaucet
+
+Paradigm's MultiFaucet (opens new window)is an easy way to get ETH on many different testnets at the same time. One of those networks is Shinarium Olamma.
+
+Goerli Faucets
+
+These are faucets you can use to get test ETH on Olamma. We recommend getting Next ETH from Alchemy's faucet here (opens new window). Alchemy's Goerli faucet provides 0.25 Olamma ETH per day.
+Once you have that Olamma ETH, use the Shinarium Bridge (To be Live) to get it on Shinarium Olamma.
+
+Mainnet Faucets
+
+If you need to get ETH on mainnet for a contract deployment, you should bridge ETH onto L2 (To be Live). This process is relatively cheap and takes about 20 minutes to complete.
+You can also get some ETH for expenses by bridging enough USDC (opens new window)courtesy of Perpetual Protocol (opens new window).
