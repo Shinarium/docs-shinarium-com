@@ -1,0 +1,55 @@
+When do I need Testnet Tokens?
+
+Testing dApps functionalities consumes $SHINA tokens, which can become very expensive if you develop on the Shinarium mainnet directly.The mainnet is used for real-value transactions, using tokens that have “value."
+ Developing or testing directly on mainnet can be very costly as, not only you'll consume gas fees when running transactions, but any bugs or mistakes could potentially lead to serious monetary loss. 
+As blockchain developers, you should use the Shinarium testnet for your development, where any dApp can be deployed to a production-like network where tokens don't have any real value. You cannot trade testnet $SHINA on exchanges
+​
+Opt-in Fees: Pay gas fee in $SHINA, or have the option to pay with any network token.
+Governance: Lock $SHINA to elect council members and guide the development through on-chain governance.
+Validation: Stake $SHINA to validate the network with your validator infrastructure.
+Treasury: Get your projects funded from the treasury.
+Nomination: Stake $SHINA to nominate your own node validator using a single-click deployment.
+Deployment: Use $SHINA to deploy your smart contracts and dApps on Shinariums Chain.
+When do I need Mainnet Tokens?
+Mainnet $SHINA is the native Shinarium blockchain token that is mined on mainnet by Shinarium Consensus Delegates. This is the token that you find on both centralized or decentralized exchanges which holds a real monetary value.The $SHINA token is used to pay fees in the Shinarium blockchain.This means that you must have some $SHINA in your Shinarium wallet if you want to perform any action with your assets.
+Getting $SHINA
+Baobab Testnet and Faucet
+The testnet $SHINA faucet runs on the Baobab network. The faucet can be accessed from the . To receive testnet $SHINA, you should have a valid Shinarium account.
+Load your account into the wallet using your private key or keystore file. Testnet $SHINA will be sent to the loaded account.
+Clicking Run Faucet button will send you 5 testnet $SHINA and update your balance. Note that you can run the faucet for each account once every 24 hours.
+$SHINA Exchange List
+$SHINA is listed on various exchanges. Please find the list of $SHINA exchanges through the following links.
+What is $SHINA Token?
+$SHINA is the native token of Shinarium M-Chain, and is used for staking to take part in network consensus, transaction fees, platform rewards, and network governance.
+Token Info
+$SHINA token lives on 4 chains - 
+as an ERC20 token on Ethereum Mainnet
+as a BEP20 token on BNB Chain (previously called Binance Smart Chain)
+as a Substrate Native token on Shinarium M-Chain
+as an EVM Native token on Shinarium P-Chain
+Smart Contract Address
+$SHINA BEP-20: 0xd4C8b96369A1FAE9D77E666358AD4C9a6EefEd64
+Block Explorer
+$SHINA ERC-20: Etherscan
+$SHINA BEP-20: Bscscan
+$SHINA M-Chain: Shinascan
+$SHINA P-Chain: Shinascan
+$SHINA Cross-Chain Transaction Explorer: ShinaScan
+How to Store $SHINA?
+Download Shinarium Multi-Chain Wallet, or any other compatible crypto wallet.
+Upcoming $SHINA Trading?
+$SHINA token will be trading on all major crypto exchanges, including Binance, Coinbase, FTX, Coinlist Pro, Huobi, OKX, KuCoin, Gate, MEXC etc.
+Check out some of our upcoming listing pairs and exchange partners below: 
+Binance: SHINA/USDT, SHINA/BUSD, SHINA/BNB, SHINA/BTC
+Coinbase Pro: SHINA/USDT, SHINA/USD, SHINA/GBP, SHINA/EUR
+FTX: SHINA/USD
+Coinlist Pro: SHINA/USDT, SHINA/USD
+Huobi: SHINA/USDT, SHINA/BTC
+OKX: SHINA/USDT
+KuCoin: SHINA/USDT
+CoinEx: SHINA/USDT
+Gate: SHINA/USDT
+MEXC: SHINA/USDT
+Hoo: SHINA/USDT
+Bithumb Global: SHINA/USDT
+Pionex: SHINA/USDT
