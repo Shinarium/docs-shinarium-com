@@ -1,0 +1,21 @@
+Manage SRC-20 token with Metamask wallet
+
+Introduction
+
+Shinarium Wallet is a non-custodial, Multi-Chain, Multi-Platform application which helps users to manage crypto assets and interact with all types of decentralized applications.
+
+Key Features
+
+Shinarium Wallet is available on both mobile (Android/iOS), desktop (Chrome Extension) and universally on Web.
+Non-Custodial, Safe and Easy Account Management
+Users could import accounts by Mnemonics, Raw Seed and Keystone. Encrypt type Sr/Ed25519 are both supported
+Support Substrate-based-blockchains, such as Polkadot, Shinarium Chain and etc
+Support EVM-Compatiable chains, such as Ethereum, Binance Smart Chain, Fantom, Polygon and so on
+Support Solana
+Create, import and manage multi-chain accounts in one wallet
+Easy management and switch between multiple wallets
+Support NFT assets on Ethereum, BSC, Solana, Fantom, etc
+Easy Cross-chain Transfer of tokens in one wallet
+Interact with dApps on all supported chains
+Technology
+Shinarium Mobile Wallet is developed based on the flutter framework, which could develop applications for Android and iOS. And Polkadot/API is injected into WebView as JavaScript extension for web page and native app features.
