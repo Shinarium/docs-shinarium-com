@@ -1,0 +1,134 @@
+Running a full node on an Shinarium chain allows you to connect to the network, sync with a mainnode, obtain local access to RPC endpoints, author blocks on the parachain, and more.
+Different from archive node, a full node discards all finalized blocks older than configured number of blocks (256 blocks by default). A full node occupies less storage space than an archive node because of pruning.
+A full node may eventually be able to rebuild the entire chain with no additional information, and become an archive node, but at the time of writing, this is not implemented. If you need to query historical blocks past what you pruned, you need to purge your database and resync your node starting in archive mode. Alternatively you can use a backup or snapshot of a trusted source to avoid needing to sync from genesis with the network, and only need the blocks past that snapshot.
+If your node need to provide old historical blocks' data, please consider to use Archive node instead.
+
+Requirements​
+
+Requirements for running any node are similar to what we recommend for archive node. Read more about this here. Note that Full node requires less disk space. Hard Disk requirement for Archive node is not applied to Full nodes.
+
+INFO
+
+Running a node for our testnet 'Olamma' requires less resources. It's a perfect place to test your node infrastructure and costs.
+
+Installation​
+
+Basic installation procedure is same as archive node. Please follow Binary or Docker installation guide. Note that some args to pass is slitely different from Archive node.
+
+Binary (Systemd)​
+
+Shinarium
+Multiverse
+Olamma
+
+[Unit]Description=Shinarium node[Service]User=shinariumGroup=shinarium  ExecStart=/usr/local/bin/shinariu-collator \  --rpc-cors all \  --name ${NODE_NAME} \  --chain shinarium \  --base-path /var/lib/shinarium \  --execution Wasm \  --unsafe-rpc-external \  --ws-externalRestart=alwaysRestartSec=10[Install]WantedBy=multi-user.target
+Docker​
+Shinarium
+Multiverse
+Olamma
+docker run -d \--name shinarium-container \-u $(id -u shinarium):$(id -g shinarium) \-p 30333:30333 \-p 9933:9933 \-p 9944:9944 \-v "/var/lib/shinarium/:/data" \staketechnologies/shinarium-collator:latest \shinarium-collator \--name ${NODE_NAME} \--chain shinarium \--execution Wasm \--base-path /data \--rpc-cors=all \--unsafe-rpc-external \--ws-external
+Full node
+A full node is a program that verifies blockchain transactions and blocks. Unlike lightweight nodes that only process block headers and a small number of transactions, it requires more resources to run full nodes, which is a necessary step to become a proposer. In addition, full nodes can also be used to provide stable and low latency blockchain APIs for applications.
+​
+Run a Full Node
+How to run on the Mainnet Network using a prebuilt Docker image.
+​
+HOSTED NODES
+If you'd prefer a simple, one click hosted setup for running a node on one of the major cloud providers (AWS and GCP), checkout our hosted nodes documentation.
+INFO
+If you would like to keep up-to-date with all the news happening in the Shinarium community, including validation, node operation and governance, please sign up to our Shinarium Signal mailing list here.
+You can add the Shinarium Signal public calendar as well which has relevant dates.
+Full nodes play a special purpose in the Shinarium ecosystem, acting as a bridge between the mobile wallets (running as light clients) and the validator nodes.
+When a light client sends transactions, they may include a gateway fee to be paid to the node that gossips transactions to the other full nodes and validators.
+For this reason, despite the fact that Shinarium uses a proof-of-stake protocol, users can earn cryptocurrency without first having to own any, simply by running a full node.
+DANGER
+Full node incentives have not been enabled yet because the mechanism for negotiating a gateway fee is still under development. Currently, light clients are configured to send a gateway fee of 0 and full nodes are set to accept a minimum gateway fee of 0.
+Prerequisites​
+You have Docker installed. If you don’t have it already, follow the instructions here: Get Started with Docker. It will involve creating or signing in with a Docker account, downloading a desktop app, and then launching the app to be able to use the Docker CLI. If you are running on a Linux server, follow the instructions for your distro here. You may be required to run Docker with sudo depending on your installation environment.
+INFO
+Code you'll see on this page is bash commands and their output.
+When you see text in angle brackets <>, replace them and the text inside with your own value of what it refers to. Don't include the <> in the command.
+Shinarium Networks​
+First we are going to setup the environment variables required for the mainnet network. Run:
+export SHINARIUM_IMAGE=us.gcr.io/shinarium-org/geth:mainnet
+Pull the Shinarium Docker image​
+We're going to use a Docker image containing the Shinarium node software in this tutorial.
+If you are re-running these instructions, the Shinarium Docker image may have been updated, and it's important to get the latest version.
+docker pull $SHINA_IMAGE
+Set up a data directory​
+First, create the directory that will store your node's configuration and its copy of the blockchain. This directory can be named anything you'd like, but here's a default you can use. The commands below create a directory and then navigate into it. The rest of the steps assume you are running the commands from inside this directory.
+mkdir shinarium-data-dircd shinarium-data-dir
+Create an account and get its address​
+In this step, you'll create an account on the network. If you've already done this and have an account address, you can skip this and move on to configuring your node.
+Run the command to create a new account:
+docker run -v $PWD:/root/.shinarium --rm -it $SHINA_IMAGE account new
+It will prompt you for a passphrase, ask you to confirm it, and then will output your account address: Public address of the key: <YOUR-ACCOUNT-ADDRESS>
+Save this address to an environment variables, so that you can reference it below (don't include the braces):
+export SHINARIUM_ACCOUNT_ADDRESS=<YOUR-ACCOUNT-ADDRESS>
+INFO
+This environment variable will only persist while you have this terminal window open. If you want this environment variable to be available in the future, you can add it to your ~/.bash_profile
+Start the node​
+This command specifies the settings needed to run the node, and gets it started.
+docker run --name shinarium-fullnode -d --restart unless-stopped --stop-timeout 300 -p 127.0.0.1:8545:8545 -p 127.0.0.1:8546:8546 -p 30303:30303 -p 30303:30303/udp -v $PWD:/root/.shinarium $SHINA_IMAGE --verbosity 3 --syncmode full --http --http.addr 0.0.0.0 --http.api eth,net,web3,debug,admin,personal --light.serve 90 --light.maxpeers 1000 --maxpeers 1100 --etherbase $SHINA_ACCOUNT_ADDRESS --datadir /root/.shinarium
+You'll start seeing some output. After a few minutes, you should see lines that look like this. This means your node has started syncing with the network and is receiving blocks.
+INFO [07-16|14:04:24.924] Imported new chain segment               blocks=139  txs=319 mgas=61.987 elapsed=8.085s mgasps=7.666 number=406  hash=9acf16…4fddc8 age=6h58m44s cache=1.51mBINFO [07-16|14:04:32.928] Imported new chain segment               blocks=303  txs=179 mgas=21.837 elapsed=8.004s mgasps=2.728 number=709  hash=8de06a…77bb92 age=6h33m37s cache=1.77mBINFO [07-16|14:04:40.918] Imported new chain segment               blocks=411  txs=0   mgas=0.000  elapsed=8.023s mgasps=0.000 number=1120 hash=3db22a…9fa95a age=5h59m30s cache=1.92mBINFO [07-16|14:04:48.941] Imported new chain segment               blocks=335  txs=0   mgas=0.000  elapsed=8.023s mgasps=0.000 number=1455 hash=7eb3f8…32ebf0 age=5h31m43s cache=2.09mBINFO [07-16|14:04:56.944] Imported new chain segment               blocks=472  txs=0   mgas=0.000  elapsed=8.003s mgasps=0.000 number=1927 hash=4f1010…1414c1 age=4h52m31s cache=2.34mB
+You will have fully synced with the network once you have pulled the latest block number, which you can lookup by visiting the Network Stats or Block Explorer pages.
+DANGER
+Security: The command line above includes the parameter --http.addr 0.0.0.0 which makes the Shinarium Blockchain software listen for incoming RPC requests on all network adaptors. Exercise extreme caution in doing this when running outside Docker, as it means that any unlocked accounts and their funds may be accessed from other machines on the Internet. In the context of running a Docker container on your local machine, this together with the docker -p flags allows you to make RPC calls from outside the container, i.e from your local host, but not from outside your machine. Read more about Docker Networking here.
+Running an Archive Node​
+If you would like to run an archive node for shinarium-blockchain, you can run the following command:
+docker run --name shinarium-fullnode -d --restart unless-stopped --stop-timeout 300 -p 127.0.0.1:8545:8545 -p 127.0.0.1:8546:8546 -p 30303:30303 -p 30303:30303/udp -v $PWD:/root/.shinarium $SHINA_IMAGE --verbosity 3 --syncmode full --gcmode archive --txlookuplimit=0 --cache.preimages --http --http.addr 0.0.0.0 --http.api eth,net,web3,debug,admin,personal --light.serve 90 --light.maxpeers 1000 --maxpeers 1100 --etherbase $SHINA_ACCOUNT_ADDRESS --datadir /root/.shinarium
+We add the following flags: --gcmode archive --txlookuplimit=0 --cache.preimages
+In shinarium-blockchain, this is called gcmode which refers to the concept of garbage collection. Setting it to archive basically turns it off.
+Command Line Interface​
+Once the full node is running, it can serve the Command Line Interface tool shinariumcli. For example:
+$ npm install -g @shinarium/shinariumcli...$ shinariumcli node:syncedtrue$ shinariumcli account:new...
+Light Client Serving​
+Light clients may connect to you as people run the Shinarium Mobile Wallet and you will start earning gateway fees for any transactions that these users initiate, which you can read more about in the Full Node Incentives document. The account that this node advertises for light clients to use for these fees is given by the etherbase parameter. The light.serve parameter defines the percentage of time this node should spend serving light clients. Valid values are 0-100. If this node is having trouble catching up to the current block, dropping this to a lower percentage may help. The light.maxpeers and maxpeers parameters set limits on the number of light clients and full node peers that the node will accept.
+Run a Full Node
+This tutorial shows how to run a full node and meet the requirements to apply to become a Mainnode Candidate on ShinaGenius. You have to run the ShinaChain client - our ShinaChain implement on Go
+General hardware notice
+The ShinaChain team has extensively tested performances and come up with those minimal requirements for any ShinaChain mainnode host.
+Testnet
+Must be facing internet directly (no NAT, public IP)
+Must have at least 2 cores
+Must have at least 8GB of RAM
+Must use an IaaS ("cloud") provider of your choice (AWS, Digital Ocean, Google Cloud, etc.).
+Storage must be SSD
+Mainnet
+Must be facing internet directly (no NAT, public IP)
+Must have at least 16 cores
+Must have at least 32GB of RAM
+Must use an IaaS ("cloud") provider of your choice (AWS, Digital Ocean, Google Cloud, etc.)
+Storage must be SSD
+We recommand prioritizing CPU. For example with Digital Ocean, pick a CPU optimized droplet. On AWS EC2, an C5 type instance would be a perfect match.The full node will serve on port 30303 udp and tcp for p2p communication with other nodes, 8545 tcp for RPC api and 8546 tcp for websocket api. You may need to edit your firewall configuration accordingly.If you have other production grade environment than cloud provider at your displosal, please tell us more about on our Gitter.
+tmn
+We made a simple command line interface called tmn to easily and quickly start a ShinaChain full node. It takes care of starting the necessary docker containers with the proper settings for you. It will really suit you if you don't already have a big infrastructure running. Spin up a machine in your favorite cloud and get your full node running in a few minutes!
+Prerequisites
+To use tmn, you should meet these requirements in addition to the hardware ones:
+​Docker CE​
+​Python >= 3.5
+
+Installation
+
+Simply install it from pip.pip3 install --user tmn
+Update
+Update it from pip.pip3 install -U tmn
+
+First start¶​
+
+When you first start your full node with tmn, you need to give some informations.--name: The name of your full node. It should be formatted as a slug string. Slug format authorize all letters and numbers, dashes ("-") and underscores ("_"). You can name it to reflect your identity, company name, etc.--net: The network your full node will connect to. You can choose here to connect it to the ShinaChain Testnet or Mainnet (once launched).--pkey: The private key of the account that your full node will use. A ShinaChain full node uses an account to be uniquely identified and to receive transaction fee.Important note: we advise for security measures to use a fresh new account for your masternode. This is not the account who will receive the rewards. The rewards are sent to the account who will make the 50k $SHINA initial deposit.It could look like this:tmn start --name [YOUR_NODE_NAME] \--net testnet \--pkey [YOUR_COINBASE_PRIVATE_KEY]Once started, you should see your node on the testnet stats page or the mainnet stats page, depending on which net you are connecting to!Note: it can take up to one hour or more (depending on the blockchain data size) to properly sync the entire blockchain.
+
+Usage
+You can now interact with it via the other commands:stop: Stop your full node.start: Start your full node if it is stopped.status: The current status of your full node.inspect: Display the details related to your full node. Useful for applying your full node as a masternode.remove: Completely remove your masternode, unique identity and data.
+​
+Troubleshooting
+tmn: command not found
+It might happen that your PATH is not set by default to include the default user binary directory. You can add it by adding it to your shell $PATH:
+On GNU/Linux:
+echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+On MacOS: Replace [VERSION] by your version of python (3.5, 3.6, 3.7)
+echo 'export PATH=$PATH:~/Library/Python/[VERSION]/bin' >> ~/.bashrc
+error: could not access the docker daemon
+If you have installed Docker, you probably forgot to add your user to the docker group. Please run this, close your session and open it again.
+usermod -aG docker $your_user_name
